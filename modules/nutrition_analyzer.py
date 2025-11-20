@@ -1,7 +1,6 @@
 
 import pandas as pd
 import numpy as np
-from sklearn.cluster import KMeans
 
 
 class NutritionAnalyzer:
@@ -78,15 +77,6 @@ class NutritionAnalyzer:
             return 'high_fat'
         else:
             return 'balanced'
-
-    def cluster_dietary_patterns(self, multiple_users_data):
-        if len(multiple_users_data) < 3:
-            return None, None
-
-        features = [[d.get(n, 0) for n in ['calories', 'protein', 'carbs', 'fats', 'fiber']]
-                    for d in multiple_users_data]
-        kmeans = KMeans(n_clusters=min(3, len(features)), random_state=42, n_init=10)
-        return kmeans.fit_predict(features), kmeans.cluster_centers_
 
     def get_nutritional_gaps(self, current_nutrition):
         return {
